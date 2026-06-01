@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   The Sacred Shelf — Global Design Tokens & Styles
+   ============================================================ */
+
+:root {
+  /* Core palette */
+  --color-bg: #FAFAF7;
+  --color-text: #1a1a1a;
+  --color-accent: #A67C2E;
+  --color-accent-light: #c9a253;
+  --color-sepia: #F5EDD8;
+  --color-dark-bg: #1C1C1E;
+  --color-dark-text: #E8E4DC;
+
+  /* Surface / card */
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #f7f3eb;
+  --color-border: #e5dfd4;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  /* Typography scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+
+  /* Spacing */
+  --space-page: 2rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   Urdu / Nastaliq Typography
+   ============================================================ */
+
+.urdu-text,
+[dir="rtl"] {
+  font-family: var(--font-noto-nastaliq), 'Noto Nastaliq Urdu', serif;
+  line-height: 2.4;
+  letter-spacing: 0;
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.urdu-heading {
+  font-family: var(--font-noto-nastaliq), 'Noto Nastaliq Urdu', serif;
+  line-height: 2;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Reader-Specific Styles
+   ============================================================ */
+
+.reader-content {
+  font-family: var(--font-noto-nastaliq), 'Noto Nastaliq Urdu', serif;
+  font-size: 1.375rem;
+  line-height: 2.6;
+  direction: rtl;
+  text-align: right;
+  color: var(--color-text);
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem var(--space-page);
+}
+
+.reader-content p {
+  margin-bottom: 1.5rem;
+  text-indent: 1.5rem;
+}
+
+.reader-content h2,
+.reader-content h3 {
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+}
+
+/* ── Theme overrides (applied to <html> via ReaderControls) ── */
+
+/* Light theme (default — no overrides needed, uses :root values) */
+html.theme-light {
+  --color-bg: #FAFAF7;
+  --color-text: #1a1a1a;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #f7f3eb;
+  --color-border: #e5dfd4;
+}
+
+/* Sepia reading mode */
+html.theme-sepia {
+  --color-bg: #F5EDD8;
+  --color-text: #3b2f1e;
+  --color-surface: #f0e6ca;
+  --color-surface-hover: #ecddb4;
+  --color-border: #d4c9a8;
+}
+
+/* Dark reading mode */
+html.theme-dark {
+  --color-bg: #1C1C1E;
+  --color-text: #E8E4DC;
+  --color-surface: #2c2c2e;
+  --color-surface-hover: #3a3a3c;
+  --color-border: #48484a;
+}
+
+/* Legacy class compat */
+.reader-sepia {
+  background-color: var(--color-sepia);
+  color: #3d3224;
+}
+
+.reader-dark {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+}
+
+/* ============================================================
+   Copy / Print Protection
+   ============================================================ */
+
+.no-copy {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+@media print {
+  .no-print,
+  .reader-content {
+    display: none !important;
+  }
+
+  body::after {
+    content: 'Printing is disabled on The Sacred Shelf.';
+    display: block;
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================================
+   Scrollbar Styling
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c5b99a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent);
+}
+
+/* ============================================================
+   Utility Classes
+   ============================================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.accent-gradient {
+  background: linear-gradient(135deg, var(--color-accent), #d4a957);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+/* Smooth page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+/* ============================================================
+   Translator Credit Bar
+   ============================================================ */
+
+.translator-credit {
+  font-size: var(--font-size-sm);
+  color: var(--color-accent);
+  text-align: center;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
