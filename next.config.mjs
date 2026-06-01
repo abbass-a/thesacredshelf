@@ -13,6 +13,9 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  experimental: {
+    serverComponentsExternalPackages: ['geoip-lite'],
+  },
   images: {
     formats: ['image/webp'],
     minimumCacheTTL: 2592000,
