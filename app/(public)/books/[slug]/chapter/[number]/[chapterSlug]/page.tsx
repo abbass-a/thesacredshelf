@@ -24,7 +24,7 @@ const ReaderInitializer = dynamic(
 // ============================================================
 // Static Params — pre-render all chapters at build time
 // ============================================================
-export const revalidate = 86400; // 24 hours
+export const revalidate = 0; // Fetch fresh data on every request
 
 export async function generateStaticParams() {
   const { data: chapters } = await supabaseAdmin
