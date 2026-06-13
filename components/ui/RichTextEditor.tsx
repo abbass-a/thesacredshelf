@@ -278,7 +278,7 @@ export const RichTextEditor = ({ value, onChange, placeholder = 'Start typing...
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-sm sm:prose-base max-w-none focus:outline-none min-h-[150px] p-4 bg-gray-50 border-t-0 rounded-b-md',
+        class: 'prose prose-sm sm:prose-base max-w-none focus:outline-none min-h-[150px] p-4 bg-gray-50 border-t-0 rounded-b-md [&_strong]:text-inherit [&_b]:text-inherit',
       },
     },
   });
