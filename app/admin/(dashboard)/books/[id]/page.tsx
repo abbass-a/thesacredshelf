@@ -158,15 +158,16 @@ export default function ChaptersPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Form Column */}
-        <div className="lg:col-span-1">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 sticky top-8">
+      <div className="flex flex-col gap-8">
+        {/* Form Section */}
+        <div className="w-full">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               {editingId ? 'Edit Chapter' : 'Add New Chapter'}
             </h2>
             
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Chapter Number</label>
@@ -217,6 +218,7 @@ export default function ChaptersPage() {
                   className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A67C2E]"
                 />
               </div>
+              </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1 flex justify-between">
@@ -254,8 +256,8 @@ export default function ChaptersPage() {
           </div>
         </div>
 
-        {/* List Column */}
-        <div className="lg:col-span-2">
+        {/* List Section */}
+        <div className="w-full">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <table className="w-full text-left text-sm whitespace-nowrap">
               <thead className="text-xs text-gray-500 uppercase bg-gray-50">
