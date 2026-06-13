@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Book = {
   id: string;
@@ -226,7 +227,7 @@ export default function BooksPage() {
         {/* List Column */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            <table className="w-full text-left text-sm whitespace-nowrap">
+            <table className="w-full text-left text-sm">
               <thead className="text-xs text-gray-500 uppercase bg-gray-50">
                 <tr>
                   <th className="px-6 py-4 font-medium">Book Details</th>
@@ -242,17 +243,17 @@ export default function BooksPage() {
                   books.map((book) => (
                     <tr key={book.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-4">
+                        <Link href={`/admin/books/${book.id}`} className="flex items-center gap-4 group">
                           {book.cover_image_url ? (
-                            <img src={book.cover_image_url} alt="Cover" className="w-12 h-16 object-cover rounded shadow-sm" />
+                            <Image src={book.cover_image_url} alt="Cover" width={48} height={64} className="w-12 h-16 object-cover rounded shadow-sm group-hover:opacity-80 transition-opacity" />
                           ) : (
-                            <div className="w-12 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-400">No Image</div>
+                            <div className="w-12 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-400 text-xs text-center group-hover:bg-gray-200 transition-colors">No<br/>Image</div>
                           )}
                           <div>
-                            <p className="font-bold text-gray-900">{book.title_english} <span className="font-urdu font-normal text-lg ml-2">{book.title_urdu}</span></p>
+                            <p className="font-bold text-gray-900 group-hover:text-[#A67C2E] transition-colors">{book.title_english} <span className="font-urdu font-normal text-lg ml-2">{book.title_urdu}</span></p>
                             <p className="text-gray-500 text-xs mt-1">Author: {book.author || 'Unknown'}</p>
                           </div>
-                        </div>
+                        </Link>
                       </td>
                       <td className="px-6 py-4 text-right space-x-3">
                         <Link 

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import RichTextEditor from '@/components/ui/RichTextEditor';
 
 type Book = {
   id: string;
@@ -221,15 +222,12 @@ export default function ChaptersPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-1 flex justify-between">
                   <span>Chapter Content (Urdu)</span>
                 </label>
-                <textarea
-                  required
-                  dir="rtl"
-                  rows={10}
-                  value={contentUrdu}
-                  onChange={(e) => setContentUrdu(e.target.value)}
-                  placeholder="Enter Urdu text here..."
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A67C2E] font-urdu leading-loose resize-y"
-                />
+                <div className="font-urdu leading-loose" dir="rtl">
+                  <RichTextEditor
+                    value={contentUrdu}
+                    onChange={(html) => setContentUrdu(html)}
+                  />
+                </div>
               </div>
 
               {error && <p className="text-red-500 text-sm bg-red-50 p-3 rounded">{error}</p>}

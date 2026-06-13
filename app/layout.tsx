@@ -36,6 +36,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
     default: 'The Sacred Shelf — مقدس شیلف',
     template: '%s | The Sacred Shelf',
@@ -87,25 +88,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const adsensePublisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   return (
     <html lang="en" dir="ltr" className={`${inter.variable} ${notoNastaliq.variable} ${lora.variable}`}>
       <head>
-        {/* Google Analytics 4 — placeholder, replace GA_MEASUREMENT_ID */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'GA_MEASUREMENT_ID');
-            `,
-          }}
-        />
+        {/* Google Analytics 4 */}
+        {gaMeasurementId && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaMeasurementId}');
+                `,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className={`${inter.className} antialiased`}>
         {/* Translator credit on every page */}

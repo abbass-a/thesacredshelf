@@ -3,6 +3,8 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
+export const dynamic = 'force-dynamic';
+
 // Mock data generator for when GA4 is not configured
 const getMockData = () => ({
   mock: true,
