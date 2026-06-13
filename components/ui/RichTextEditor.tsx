@@ -4,6 +4,8 @@ import TextDirection from 'tiptap-text-direction';
 import { TextStyle } from '@tiptap/extension-text-style';
 import { FontFamily } from '@tiptap/extension-font-family';
 import { TextAlign } from '@tiptap/extension-text-align';
+import UnderlineExtension from '@tiptap/extension-underline';
+import { Color } from '@tiptap/extension-color';
 import { LineHeight } from '../tiptap-extensions/LineHeight';
 import {
   Bold,
@@ -15,6 +17,7 @@ import {
   AlignJustify,
   Heading1,
   Heading2,
+  Underline as UnderlineIcon,
   Undo,
   Redo,
   Baseline,
@@ -39,9 +42,13 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
   const fontFamilies = [
     { label: 'Inter', value: 'Inter' },
     { label: 'Nastaliq (Urdu)', value: 'var(--font-noto-nastaliq), "Noto Nastaliq Urdu", serif' },
+    { label: 'Jameel Noori', value: '"Jameel Noori Nastaleeq", serif' },
+    { label: 'Arial', value: 'Arial, sans-serif' },
+    { label: 'Times New Roman', value: '"Times New Roman", serif' },
+    { label: 'Georgia', value: 'Georgia, serif' },
+    { label: 'Verdana', value: 'Verdana, sans-serif' },
+    { label: 'Courier New', value: '"Courier New", monospace' },
     { label: 'Comic Sans MS', value: 'Comic Sans MS, Comic Sans' },
-    { label: 'Serif', value: 'serif' },
-    { label: 'Monospace', value: 'monospace' },
   ];
 
   const lineHeights = [
@@ -77,6 +84,19 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
 
       <div className="w-px h-6 bg-gray-300 mx-1"></div>
 
+      {/* Color Picker */}
+      <div className="flex items-center gap-1">
+        <input
+          type="color"
+          onInput={event => editor.chain().focus().setColor((event.target as HTMLInputElement).value).run()}
+          value={editor.getAttributes('textStyle').color || '#000000'}
+          className="w-8 h-8 p-0 border-0 rounded cursor-pointer bg-transparent"
+          title="Text Color"
+        />
+      </div>
+
+      <div className="w-px h-6 bg-gray-300 mx-1"></div>
+
       {/* Formatting buttons */}
       <div className="flex items-center gap-1">
         <button
@@ -94,6 +114,14 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
           title="Italic"
         >
           <Italic size={18} />
+        </button>
+        <button
+          onClick={(e) => { e.preventDefault(); editor.chain().focus().toggleUnderline().run() }}
+          disabled={!editor.can().chain().focus().toggleUnderline().run()}
+          className={`p-1.5 rounded hover:bg-gray-100 ${editor.isActive('underline') ? 'bg-gray-200 text-blue-600' : 'text-gray-700'}`}
+          title="Underline"
+        >
+          <UnderlineIcon size={18} />
         </button>
         <button
           onClick={(e) => { e.preventDefault(); editor.chain().focus().toggleStrike().run() }}
@@ -241,6 +269,8 @@ export const RichTextEditor = ({ value, onChange, placeholder = 'Start typing...
         types: ['heading', 'paragraph'],
       }),
       LineHeight,
+      UnderlineExtension,
+      Color,
     ],
     content: value,
     onUpdate: ({ editor }) => {
@@ -248,7 +278,7 @@ export const RichTextEditor = ({ value, onChange, placeholder = 'Start typing...
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-sm sm:prose-base focus:outline-none min-h-[150px] p-4 bg-gray-50 border-t-0 rounded-b-md',
+        class: 'prose prose-sm sm:prose-base max-w-none focus:outline-none min-h-[150px] p-4 bg-gray-50 border-t-0 rounded-b-md',
       },
     },
   });

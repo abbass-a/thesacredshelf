@@ -40,6 +40,7 @@ export default function ChaptersPage() {
   const [titleEnglish, setTitleEnglish] = useState('');
   const [slug, setSlug] = useState('');
   const [contentUrdu, setContentUrdu] = useState('');
+  const [showPreview, setShowPreview] = useState(false);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -236,6 +237,13 @@ export default function ChaptersPage() {
 
               <div className="flex gap-2">
                 <button
+                  type="button"
+                  onClick={() => setShowPreview(true)}
+                  className="px-6 py-2.5 bg-gray-100 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors shadow-sm"
+                >
+                  Preview
+                </button>
+                <button
                   type="submit"
                   disabled={isSubmitting}
                   className="flex-1 py-2.5 bg-[#1C1C1E] text-white rounded-lg font-medium hover:bg-[#A67C2E] transition-colors shadow-sm disabled:opacity-70"
@@ -309,6 +317,30 @@ export default function ChaptersPage() {
           </div>
         </div>
       </div>
+
+      {/* Preview Modal */}
+      {showPreview && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-[#fcfcfc] w-full max-w-4xl h-[90vh] rounded-xl shadow-2xl flex flex-col overflow-hidden">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200 bg-white">
+              <h3 className="font-bold text-lg">Chapter Preview</h3>
+              <button 
+                onClick={() => setShowPreview(false)}
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors"
+              >
+                Close Preview
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-8 md:p-12">
+              <div 
+                className="reader-content font-urdu text-right" 
+                dir="rtl"
+                dangerouslySetInnerHTML={{ __html: contentUrdu }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
