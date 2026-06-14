@@ -5,7 +5,7 @@ export default function BookSchema({ book }: { book: Book }) {
     '@context': 'https://schema.org',
     '@type': 'Book',
     name: book.title_english,
-    alternateName: book.title_urdu,
+    alternateName: book.title_urdu || undefined,
     inLanguage: 'ur',
     author: {
       '@type': 'Person',

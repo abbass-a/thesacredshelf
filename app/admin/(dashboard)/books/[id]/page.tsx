@@ -198,9 +198,8 @@ export default function ChaptersPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Urdu Title</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Urdu Title <span className="text-gray-400 font-normal">(optional)</span></label>
                 <input
-                  required
                   type="text"
                   dir="rtl"
                   value={titleUrdu}

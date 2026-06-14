@@ -123,14 +123,14 @@ export default async function ChapterReaderPage({
   // ── Fetch prev/next chapters ────────────────────────────────
   const { data: prevChapter } = await supabaseAdmin
     .from('chapters')
-    .select('id, slug, title_urdu, chapter_number')
+    .select('id, slug, title_urdu, title_english, chapter_number')
     .eq('book_id', book.id)
     .eq('chapter_number', chapterNumber - 1)
     .single();
 
   const { data: nextChapter } = await supabaseAdmin
     .from('chapters')
-    .select('id, slug, title_urdu, chapter_number')
+    .select('id, slug, title_urdu, title_english, chapter_number')
     .eq('book_id', book.id)
     .eq('chapter_number', chapterNumber + 1)
     .single();
@@ -174,7 +174,8 @@ export default async function ChapterReaderPage({
               {book.title_english}
             </Link>
 
-            {/* Chapter name (Urdu) — right */}
+            {/* Chapter name — right */}
+            {chapter.title_urdu ? (
             <h1
               className="text-lg font-bold truncate max-w-[55%]"
               dir="rtl"
@@ -187,6 +188,14 @@ export default async function ChapterReaderPage({
             >
               {chapter.title_urdu}
             </h1>
+            ) : (
+            <h1
+              className="text-lg font-bold truncate max-w-[55%]"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {chapter.title_english || `Chapter ${chapterNumber}`}
+            </h1>
+            )}
           </div>
 
           {/* Reading progress bar */}

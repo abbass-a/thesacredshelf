@@ -153,6 +153,7 @@ export default async function BookPage({
               <h1 className="font-serif text-3xl md:text-5xl font-bold text-[#1a1a1a] mb-2 leading-tight">
                 {book.title_english}
               </h1>
+              {book.title_urdu ? (
               <h2 
                 className="text-2xl md:text-4xl text-[#A67C2E] mb-6 text-right lg:text-left"
                 dir="rtl" 
@@ -161,6 +162,7 @@ export default async function BookPage({
               >
                 {book.title_urdu}
               </h2>
+              ) : null}
             </div>
 
             <div className="prose prose-lg max-w-none text-gray-600">
@@ -209,6 +211,7 @@ export default async function BookPage({
                           <span className="font-medium text-gray-900 group-hover:text-[#A67C2E] transition-colors">
                             {chapter.title_english || `Chapter ${chapter.chapter_number}`}
                           </span>
+                          {chapter.title_urdu ? (
                           <span 
                             className="text-[#A67C2E] text-sm mt-1" 
                             dir="rtl" 
@@ -217,6 +220,7 @@ export default async function BookPage({
                           >
                             {chapter.title_urdu}
                           </span>
+                          ) : null}
                         </div>
                       </div>
                       

@@ -31,6 +31,7 @@ export default function BookCard({ book, priority = false }: { book: BookCardTyp
           </span>
         )}
         
+        {book.title_urdu ? (
         <h3 
           className="text-xl font-bold mb-2 text-right text-gray-900 group-hover:text-[#A67C2E] transition-colors"
           dir="rtl"
@@ -39,6 +40,7 @@ export default function BookCard({ book, priority = false }: { book: BookCardTyp
         >
           {book.title_urdu}
         </h3>
+        ) : null}
         
         <h4 className="text-sm font-medium text-gray-600 mb-4 flex-grow">
           {book.title_english}

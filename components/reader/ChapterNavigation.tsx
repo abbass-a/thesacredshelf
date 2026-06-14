@@ -6,6 +6,7 @@ interface NavChapter {
   id: string;
   slug: string;
   title_urdu: string;
+  title_english?: string;
   chapter_number: number;
 }
 
@@ -66,7 +67,7 @@ export default function ChapterNavigation({
               className="block truncate font-nastaliq"
               style={{ lineHeight: '2.2', color: 'var(--color-text)' }}
             >
-              {prevChapter.title_urdu}
+              {prevChapter.title_urdu || prevChapter.title_english || `Chapter ${prevChapter.chapter_number}`}
             </span>
           </div>
         </Link>
@@ -106,7 +107,7 @@ export default function ChapterNavigation({
               className="block truncate font-nastaliq"
               style={{ lineHeight: '2.2', color: 'var(--color-text)' }}
             >
-              {nextChapter.title_urdu}
+              {nextChapter.title_urdu || nextChapter.title_english || `Chapter ${nextChapter.chapter_number}`}
             </span>
           </div>
         </Link>

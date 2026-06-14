@@ -37,6 +37,7 @@ export default function BookListRow({ book }: BookListRowProps) {
             <h3 className="text-xl font-bold font-serif text-gray-900 mb-1">
               {book.title_english}
             </h3>
+            {book.title_urdu ? (
             <h4 
               className="text-lg text-gray-600 text-right md:text-left"
               dir="rtl"
@@ -45,6 +46,7 @@ export default function BookListRow({ book }: BookListRowProps) {
             >
               {book.title_urdu}
             </h4>
+            ) : null}
           </div>
           
           <Link 

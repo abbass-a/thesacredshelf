@@ -110,7 +110,7 @@ export default function TableOfContents({
                       <span className="text-xs opacity-50 font-inter ml-2 inline-block" dir="ltr">
                         {ch.chapter_number}
                       </span>
-                      {ch.title_urdu}
+                      {ch.title_urdu || ch.title_english || `Chapter ${ch.chapter_number}`}
                       {ch.page_start && ch.page_end && (
                         <span className="block text-xs opacity-40 font-inter mt-0.5" dir="ltr">
                           pp. {ch.page_start}–{ch.page_end}

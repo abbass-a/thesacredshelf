@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
   // ── Fetch previous chapter ─────────────────────────────────
   const { data: prevChapter } = await supabaseAdmin
     .from('chapters')
-    .select('id, slug, title_urdu, chapter_number')
+    .select('id, slug, title_urdu, title_english, chapter_number')
     .eq('book_id', chapter.book_id)
     .eq('chapter_number', chapter.chapter_number - 1)
     .single();
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
   // ── Fetch next chapter ─────────────────────────────────────
   const { data: nextChapter } = await supabaseAdmin
     .from('chapters')
-    .select('id, slug, title_urdu, chapter_number')
+    .select('id, slug, title_urdu, title_english, chapter_number')
     .eq('book_id', chapter.book_id)
     .eq('chapter_number', chapter.chapter_number + 1)
     .single();
