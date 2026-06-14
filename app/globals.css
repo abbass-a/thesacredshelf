@@ -81,11 +81,7 @@ body {
   direction: rtl;
 }
 
-.urdu-heading {
-  font-family: var(--font-noto-nastaliq), 'Noto Nastaliq Urdu', serif;
-  line-height: 2;
-  font-weight: 700;
-}
+
 
 /* ============================================================
    Reader-Specific Styles
@@ -134,6 +130,45 @@ body {
 .reader-content s,
 .reader-content strike {
   text-decoration: line-through;
+}
+
+/* ── Footnotes: override inherited RTL so footnotes render LTR when appropriate ── */
+.reader-content [data-footnote],
+.reader-content .footnote,
+.reader-content sup,
+.reader-content sub {
+  direction: inherit;
+  unicode-bidi: embed;
+}
+
+.reader-content p[dir="ltr"],
+.reader-content div[dir="ltr"],
+.reader-content span[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* ── TipTap Editor Cursor & Direction Fixes ── */
+.ProseMirror {
+  caret-color: auto;
+}
+
+.ProseMirror [dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+.ProseMirror [dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Ensure paragraphs without explicit dir inherit properly */
+.ProseMirror p,
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3 {
+  unicode-bidi: plaintext;
 }
 
 .reader-content ul {

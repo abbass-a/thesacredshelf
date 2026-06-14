@@ -42,6 +42,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
   const fontFamilies = [
     { label: 'Inter', value: 'Inter' },
     { label: 'Nastaliq (Urdu)', value: 'var(--font-noto-nastaliq), "Noto Nastaliq Urdu", serif' },
+    { label: 'Naskh (Arabic)', value: 'var(--font-noto-naskh), "Noto Naskh Arabic", serif' },
     { label: 'Jameel Noori', value: '"Jameel Noori Nastaleeq", serif' },
     { label: 'Arial', value: 'Arial, sans-serif' },
     { label: 'Times New Roman', value: '"Times New Roman", serif' },
@@ -262,6 +263,7 @@ export const RichTextEditor = ({ value, onChange, placeholder = 'Start typing...
       StarterKit,
       TextDirection.configure({
         types: ['heading', 'paragraph'],
+        defaultDirection: 'rtl',
       }),
       TextStyle,
       FontFamily,
@@ -279,6 +281,8 @@ export const RichTextEditor = ({ value, onChange, placeholder = 'Start typing...
     editorProps: {
       attributes: {
         class: 'prose prose-sm sm:prose-base max-w-none focus:outline-none min-h-[150px] p-4 bg-gray-50 border-t-0 rounded-b-md [&_strong]:text-inherit [&_b]:text-inherit',
+        dir: 'rtl',
+        style: 'direction: rtl; text-align: right; unicode-bidi: plaintext;',
       },
     },
   });

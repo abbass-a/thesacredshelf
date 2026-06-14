@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Noto_Nastaliq_Urdu, Lora } from 'next/font/google';
+import { Inter, Noto_Nastaliq_Urdu, Noto_Naskh_Arabic, Lora } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
@@ -24,6 +24,14 @@ const notoNastaliq = Noto_Nastaliq_Urdu({
   weight: ['400', '700'],
   display: 'swap',
   variable: '--font-noto-nastaliq',
+  preload: true,
+});
+
+const notoNaskh = Noto_Naskh_Arabic({
+  subsets: ['arabic'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-noto-naskh',
   preload: true,
 });
 
@@ -91,7 +99,7 @@ export default function RootLayout({
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   return (
-    <html lang="en" dir="ltr" className={`${inter.variable} ${notoNastaliq.variable} ${lora.variable}`}>
+    <html lang="en" dir="ltr" className={`${inter.variable} ${notoNastaliq.variable} ${notoNaskh.variable} ${lora.variable}`}>
       <head>
         {/* Google Analytics 4 */}
         {gaMeasurementId && (

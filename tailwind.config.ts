@@ -29,6 +29,7 @@ const config: Config = {
       fontFamily: {
         inter: ["var(--font-inter)", "system-ui", "sans-serif"],
         nastaliq: ["var(--font-noto-nastaliq)", "Noto Nastaliq Urdu", "serif"],
+        naskh: ["var(--font-noto-naskh)", "Noto Naskh Arabic", "serif"],
       },
       boxShadow: {
         sm: "var(--shadow-sm)",
